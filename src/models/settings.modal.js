@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const settingScheme = new mongoose.Schema(
   {
     name: {
       type: String,
     },
-    email: {
+    logo: {
       type: String,
     },
-    password: {
+    theme: {
       type: String,
     },
   },
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
     toJSON: { 
       transform: function (doc, ret) {
-        for (const iterator of ['password', '__v', 'createdAt', 'updatedAt']) {
+        for (const iterator of ['__v', '_id', 'createdAt']) {
           delete ret[iterator]; 
         }
       }
@@ -24,4 +24,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports =  mongoose.model("User", userSchema);
+module.exports = mongoose.model("Settings", settingScheme)

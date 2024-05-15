@@ -1,4 +1,4 @@
 const User = require("./user.model");
-const Services = require("./services.model");
+const Settings = require("./settings.modal");
 
-module.exports = { User, Services };
+module.exports = { User, Settings };

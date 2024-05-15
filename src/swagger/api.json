@@ -1,0 +1,169 @@
+{
+  "title" : "Music API Documentation",
+  "swagger": "2.0",
+  "description" : "MUSIC API course for egghead",
+  "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0",
+    "host": "localhost:5001",
+    "basePath": "/api",
+    "securityDefinitions": {
+      "BearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
+      }
+    },
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for Users Endpoints"
+      }
+    ],
+    "schemes": ["http","https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths" :{
+      "/login":{
+        "post":{
+          "tags": ["Users"],
+          "summary": "API Endpoint to login his/her account",
+          "description" : "Login user",
+          "parameters":[
+            {
+              "name": "user",
+              "description": "User params to login",
+              "in": "body",
+              "required": "true",
+              "schema" : {
+                "$ref" : "#definitions/UserLogin"
+              }
+            }
+          ],
+          "produces" : ["application/json"],
+          "responses":{
+            "200":{
+              "description" : "New user has been loggedIn",
+              "schema": {
+               "$ref" : "#definitions/UserLoginRsp"
+              }
+            }
+          }
+        }
+      },
+      "/register":{
+        "post":{
+          "tags": ["Users"],
+          "summary": "API Endpoint to register his/her account",
+          "description" : "Register user",
+          "parameters":[
+            {
+              "name": "user",
+              "description": "User params to register",
+              "in": "body",
+              "required": "true",
+              "schema" : {
+                "$ref" : "#definitions/UserLogin"
+              }
+            }
+          ],
+          "produces" : ["application/json"],
+          "responses":{
+            "200":{
+              "description" : "New user has loggedIn",
+              "schema": {
+               "$ref" : "#definitions/UserLoginRsp"
+              }
+            }
+          }
+        }
+      },
+      "/settings":{
+        "post":{
+          "tags": ["Users"],
+          "summary": "API Endpoint to update settings",
+          "description" : "Update app setting",
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "parameters":[
+            {
+              "name": "setting",
+              "description": "Setting params to update app",
+              "in": "body",
+              "required": "true",
+              "schema" : {
+                "$ref" : "#definitions/AppSetting"
+              }
+            }
+          ],
+          "produces" : ["application/json"],
+          "responses":{
+            "200":{
+              "description" : "New user has loggedIn",
+              "schema": {
+               "$ref" : "#definitions/UserLoginRsp"
+              }
+            }
+          }
+        }
+      }
+
+
+    },
+    "definitions":{
+      "AppSetting":{
+        "required": ["logo", "title"],
+        "properties":{
+          "logo": {
+            "type" : "string"
+          },
+          "name": {
+            "type" : "string"
+          },
+          "theme": {
+            "type" : "string"
+          }
+        }
+      },
+      "UserLogin":{
+        "required": ["email", "password"],
+        "properties":{
+          "email": {
+            "type" : "string"
+          },
+          "password": {
+            "type" : "string"
+          }
+        }
+      },
+      "UserLoginRsp":{
+        "properties":{
+          "status" :{
+            "type" : "number"
+          },
+          "message":{
+            "type" : "string"
+          },
+          "data": {
+            "_id":{
+            "type" : "string"
+          },
+              "email":{
+            "type" : "string"
+          }
+            },
+          "accessToken":{
+            "type" : "string"
+          },
+          "refreshToken":{
+            "type" : "string"
+          } 
+        }
+      }
+    }
+}

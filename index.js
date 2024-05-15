@@ -3,14 +3,14 @@ const app = express();
 const { PORT } = require("./src/config");
 const dbConnection = require("./src/database");
 const { errorHandler } = require("./src/middleware");
+const swagger = require('./src/swagger')
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 dbConnection();
+swagger(app)
 
-app.get("/", (req, res) => {
-  res.send("Ahdus Backend !");
-});
 require("./src/routes")(app);
 
 app.use(errorHandler);

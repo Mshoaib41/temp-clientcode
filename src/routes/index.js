@@ -1,4 +1,13 @@
+const {sanitize} = require('../middleware')
+const routes = [
+  require("./auth.routes"),
+  require("./settings.routes")
+]
+
+
 module.exports = function (app) {
-  app.use("/api", require("./auth.routes"));
-  app.use("/api", require("./services.routes"));
+  app.use("/api",
+    sanitize,
+    routes
+  );
 };

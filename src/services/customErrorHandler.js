@@ -21,6 +21,10 @@ class CustomErrorHandler extends Error {
     return new CustomErrorHandler(401, message);
   }
 
+  static unAuthorized(message = "unAuthorized") {
+    return new CustomErrorHandler(401, message);
+  }
+
   static conflict(message = "Conflict with current state") {
     return new CustomErrorHandler(409, message);
   }
